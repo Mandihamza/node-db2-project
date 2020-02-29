@@ -12,4 +12,13 @@ router.get("/", async (req, res, next) => {
     }
 })
 
+router.get("/:id", async (req, res, next) => {
+    try {
+        const cars = await db.first("*").from("cars").where({ id: req.params.id })
+        res.json(cars)
+    } catch (err) {
+        next(err)
+    }
+})
+
 module.exports = router
