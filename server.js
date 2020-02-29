@@ -1,7 +1,7 @@
 const express = require('express');
 
-const carsRouter = require("./cars/carsRouter.js")
 const welcomeRouter = require("./welcome/welcomeRouter.js")
+const carsRouter = require("./cars/carsRouter.js")
 
 const server = express();
 
