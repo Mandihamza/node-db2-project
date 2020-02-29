@@ -21,4 +21,40 @@ router.get("/:id", async (req, res, next) => {
     }
 })
 
+router.post("/", async (req, res, next) => {
+    try {
+        const payload = {
+            VIN: req.body.VIN,
+            make: req.body.make,
+            model: req.body.model,
+            mileage: req.body.mileage,
+            transmissionType: req.body.transmissionType,
+            titleStatus: req.body.titleStatus
+        }
+        const [id] = await db("cars").insert(payload)
+        const newCar = await db("cars").where("id", id).first()
+        res.status(204).json(newCar)
+    } catch (err) {
+        next(err)
+    }
+})
+
+router.put("/:id", async (req, res, next) => {
+    try {
+        const payload = {
+            VIN: req.body.VIN,
+            make: req.body.make,
+            model: req.body.model,
+            mileage: req.body.mileage,
+            transmissionType: req.body.transmissionType,
+            titleStatus: req.body.titleStatus
+        }
+        await db("cars").where("id", req.params.id).update(payload)
+        const car = await db("cars").where("id", req.params.id).first()
+        res.json(car)
+    } catch (err) {
+        next(err)
+    }
+})
+
 module.exports = router
