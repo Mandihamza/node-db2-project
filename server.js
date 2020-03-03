@@ -2,12 +2,15 @@ const express = require('express');
 
 const welcomeRouter = require("./welcome/welcomeRouter.js")
 const carsRouter = require("./cars/carsRouter.js")
+const salesRouter = require("./sales/salesRouter.js")
 
 const server = express();
 
 server.use(express.json());
 server.use("/", welcomeRouter)
 server.use("/api/cars", carsRouter)
+server.use("/api/sales", salesRouter)
+
 
 server.use((err, req, res, next) => {
 	console.log(err)
